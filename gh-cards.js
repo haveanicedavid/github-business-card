@@ -16,31 +16,20 @@ if (Meteor.isServer) {
 }
 
 if (Meteor.isClient) {
-  // counter starts at 0
-  // Session.setDefault('counter', 0);
   Meteor.subscribe('userCards');
+
+  Template.body.helpers({
+    userCards: function() {
+      return UserCards.find({});
+    }
+  });
 
   Template.body.events({
     'click .new-user': function () {
-      // increment the counter when button is clicked
+
       // var token = Meteor.user().services.github.accessToken;
-      // HTTP.get('http://api.github.com/user', function(userData) {
-      //   console.log(userData);
-        // Meteor.call('createCard', userData);
-      // });
-      var method = 'GET';
-      var token = Meteor.user().services.github.accessToken;
-      var url = 'http://api.github.com/user?access_token=' + token;
-      // var options = {
-      //   headers: {'Authorization':  token }
-      // };
-      Meteor.call('createCard', method, url, function (error, result) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(result);
-        }
-      });
+      // var url = 'http://api.github.com/user?access_token=' + token;
+      Meteor.call('fetchUserData');
     }
   });
 
@@ -49,6 +38,9 @@ if (Meteor.isClient) {
     //   return Session.get('counter');
     // }
     firstName: function() {
+      var user = UserCards.findOne(_id);
+
+      console.log(user.login);
       // console.log(Meteor.userId());
       // return Meteor.users;
     }
@@ -56,21 +48,33 @@ if (Meteor.isClient) {
 }
 
 Meteor.methods({
-  createCard: function(method, url, options) {
+  fetchUserData: function() {
+    var token = Meteor.user().services.github.accessToken;
+    var url = 'http://api.github.com/user?access_token=' + token;
+
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
     }
-    // var token = Meteor.user().services.github.accessToken;
-    HTTP.call(method, url, function(error, result) {
+
+    HTTP.get(url, function(error, result) {
       if (error) {
         console.log(error);
       } else {
-        console.log(result);
+        console.log(result.data);
+        Meteor.call('createCard', result.data);
       }
     });
-
-    // UserCards.insert({
-    //   login: userData.login
-    // });
   },
+
+  createCard: function(userData) {
+    UserCards.insert({
+      owner: Meteor.userId(),
+      login: userData.login,
+      followers: userData.followers,
+      following: userData.following,
+      email: userData.email,
+    });
+  }
+
+
 });
