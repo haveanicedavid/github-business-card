@@ -3,30 +3,79 @@
 </head>
 
 <body>
-  {{> loginButtons}}
+  <div class="container">
+    {{> loginButtons}}
 
-  {{#if currentUser}}
-    <h1>Hello, brrrruh</h1>
-  {{ else }}
-    <h1>Please log in</h1>
-  {{ /if }}
+    {{#unless currentUser}}
+      <h1>Please log in</h1>
+    {{else}}
+      {{#unless cardMade}}
+        <a class="waves-effect waves-light btn new-user">Fetch My Card</a>
+      {{/unless}}
+    {{ /unless }}
 
-  <button class="new-user">New Card</button>
+  </div>
 
-  <ul>
+  <div class="row">
     {{#each userCards}}
+    <div class="col s3">
       {{>userCard}}
+    </div>
     {{/each}}
-  </ul>
+  </div>
+  {{>editInfo}}
 
 </body>
 
 <template name="userCard">
-  <table>
-    <tr>Username: {{login}}</tr>
-    <tr>Followers: {{followers}}</tr>
-    <tr>Following: {{following}}</tr>
-    <tr>Email: {{email}}</tr>
-  </table>
+  <div class="card blue-grey darken-1">
+    <div class="card-content white-text">
+      <span class="card-title">{{name}}</span>
+      <p>Username: {{login}}</p>
+      <p>Email: {{email}}</p>
+      <p>Location: {{location}}</p>
+      <p>Followers: {{followers}}</p>
+      <p>Following: {{following}}</p>
+    </div>
+    <div class="card-action">
+      <a href="#">Delete</a>
+      <a href="#">Share</a>
+    </div>
+  </div>
+</template>
+
+<template name="editInfo">
+  <div class="row">
+    <form class="col s6">
+      <div class="row">
+        <div class="input-field col s6">
+          <input value="{{name}}" id="first_name" type="text" class="validate">
+          <label for="first_name">Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Username</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input disabled value="I am not editable" id="disabled" type="text" class="validate">
+          <label for="disabled">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate">
+          <label for="password">Location</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+    </form>
+  </div>
 </template>
 
