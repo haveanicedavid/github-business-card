@@ -3,18 +3,23 @@
 </head>
 
 <body>
-  {{ > loginButtons }}
-  
-  {{ #if currentUser }}
+  {{> loginButtons}}
+
+  {{#if currentUser}}
     <h1>Hello, brrrruh</h1>
   {{ else }}
     <h1>Please log in</h1>
   {{ /if }}
 
-  {{> hello}}
+  <button class="new-user">New Card</button>
+  <ul>
+    {{#each userCards}}
+      {{>userCard}}
+    {{/each}}
+  </ul>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="userCard">
+  <p>Hello, </p>
 </template>
+
