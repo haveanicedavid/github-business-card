@@ -33,18 +33,18 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.userCard.helpers({
-    // counter: function () {
-    //   return Session.get('counter');
-    // }
-    firstName: function() {
-      var user = UserCards.findOne(_id);
+  // Template.userCard.helpers({
+  //   // counter: function () {
+  //   //   return Session.get('counter');
+  //   // }
+  //   // firstName: function() {
+  //   //   var user = UserCards.findOne(_id);
 
-      console.log(user.login);
-      // console.log(Meteor.userId());
-      // return Meteor.users;
-    }
-  });
+  //   //   console.log(user.login);
+  //   //   // console.log(Meteor.userId());
+  //   //   // return Meteor.users;
+  //   // }
+  // });
 }
 
 Meteor.methods({
