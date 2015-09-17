@@ -12,11 +12,13 @@
   {{ /if }}
 
   <button class="new-user">New Card</button>
+
   <ul>
     {{#each userCards}}
       {{>userCard}}
     {{/each}}
   </ul>
+  
 </body>
 
 <template name="userCard">
