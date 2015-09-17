@@ -1,9 +1,7 @@
 UserCards = new Mongo.Collection('userCards');
 
 if (Meteor.isServer) {
-  // Meteor.startup(function () {
-  //   // code to run on server at startup
-  // });
+
   Meteor.publish('userCards', function() {
     if (this.userId) {
       return Meteor.users.find(
@@ -26,25 +24,9 @@ if (Meteor.isClient) {
 
   Template.body.events({
     'click .new-user': function () {
-
-      // var token = Meteor.user().services.github.accessToken;
-      // var url = 'http://api.github.com/user?access_token=' + token;
       Meteor.call('fetchUserData');
     }
   });
-
-  // Template.userCard.helpers({
-  //   // counter: function () {
-  //   //   return Session.get('counter');
-  //   // }
-  //   // firstName: function() {
-  //   //   var user = UserCards.findOne(_id);
-
-  //   //   console.log(user.login);
-  //   //   // console.log(Meteor.userId());
-  //   //   // return Meteor.users;
-  //   // }
-  // });
 }
 
 Meteor.methods({
@@ -75,6 +57,4 @@ Meteor.methods({
       email: userData.email,
     });
   }
-
-
 });
