@@ -18,13 +18,30 @@
     {{#if cardMade}}
     <div class="row">
       <div class="col s6">
+        <h3 class="center title-bar">Your Card</h3>
         {{>currentUserCard}}
       </div>
       {{>editInfoForm}}
     </div>
     {{/if}}
-  </div>
 
+
+    {{#if currentUser}}
+      <div class="center">
+        <h3>Public Cards</h3>
+      </div>
+
+      <div class="row">
+        <div class="col s6">
+          {{#each userCards}}
+            {{>userCard}}
+          {{/each}}
+        </div>
+      </div>
+    {{/if}}
+    
+
+  </div>
 </body>
 
 <template name="currentUserCard">
@@ -38,14 +55,19 @@
       <p>Following: {{user.following}}</p>
     </div>
     <div class="card-action">
-      <a href="#">Delete</a>
-      <a href="#">Share</a>
+      <a href="#" class="toggle-private">
+        {{#if user.private}}
+          Private
+        {{else}}
+          Public
+        {{/if}}
+      </a>
     </div>
   </div>
 </template>
 
 <template name="editInfoForm">
-  <h3 class="center">Edit</h3>
+  <h3 class="center edit-title">Edit</h3>
   <div class="row">
     <form class="col s6">
       <div class="row">
@@ -69,9 +91,25 @@
         </div>
       </div>
       <div class="center">
-        <input id="" class="waves-effect waves-light btn edit" type="submit" value="Save Changes">
+        <input id="" class="waves-effect waves-light btn" type="submit" value="Save Changes">
       </div>
     </form>
+  </div>
+</template>
+
+<template name="userCard">
+  <div class="card blue-grey darken-1">
+    <div class="card-content white-text">
+      <span class="card-title">{{name}}</span>
+      <p>Username: {{login}}</p>
+      <p>Email: {{email}}</p>
+      <p>Location: {{location}}</p>
+      <p>Followers: {{followers}}</p>
+      <p>Following: {{following}}</p>
+    </div>
+    <div class="card-action">
+      <a href="{{url}}">Visit their Github</a>
+    </div>
   </div>
 </template>
 

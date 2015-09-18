@@ -2,19 +2,18 @@ UserCards = new Mongo.Collection('userCards');
 
 if (Meteor.isServer) {
 
-  // Meteor.publish('userCards', function() {
-  //   if (this.userId) {
-  //     return Meteor.users.find(
-  //         {_id: this.userId}
-  //       );
-  //   } else {
-  //     this.ready();
-  //   }
-  // });
+  Meteor.publish('userCards', function() {
+    return UserCards.find({
+      $or: [
+        { private: {$ne: true} },
+        { owner: this.userId() }
+      ]
+    });
+  });
 }
 
 if (Meteor.isClient) {
-  // Meteor.subscribe('userCards');
+  Meteor.subscribe('userCards');
 
   Template.body.helpers({
     userCards: function() {
@@ -31,18 +30,25 @@ if (Meteor.isClient) {
     'click .fetch-info': function () {
       Meteor.call('fetchUserData', this._id);
     },
+
+    'click .toggle-private': function(event) {
+      event.preventDefault();
+      var card = UserCards.findOne({owner: Meteor.userId()});
+      Meteor.call('setPrivate', card._id, !card.private);
+    }
   });
 
   Template.currentUserCard.helpers({
     user: function() {
-      var user = UserCards.findOne({id: this._id});
+      var user = UserCards.findOne({owner: Meteor.userId()});
       return {
         name:      user.name,
         username:  user.login,
         email:     user.email,
         location:  user.location,
         followers: user.followers,
-        following: user.following
+        following: user.following,
+        private:   user.private
       };
     }
 
@@ -109,6 +115,7 @@ Meteor.methods({
       followers: userData.followers,
       following: userData.following,
       email:     userData.email,
+      url:       userData.html_url,
     });
   },
 
@@ -121,5 +128,14 @@ Meteor.methods({
       followers: followers,
       following: following
     }});
+  },
+
+  setPrivate: function(cardId, setToPrivate) {
+    var card = UserCards.findOne(cardId);
+    if (card.owner !== Meteor.userId()) {
+      throw new Meteor.Error('not-authorized');
+    }
+
+    UserCards.update(cardId, { $set: { private: setToPrivate } });
   }
 });

@@ -21,3 +21,12 @@ input#submit{
   outline: 0;
   -webkit-tap-highlight-color: transparent;
 }
+
+.title-bar {
+  padding-bottom: 10px;
+}
+
+.edit-title {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
