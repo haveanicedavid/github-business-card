@@ -10,32 +10,32 @@
       <h1>Please log in</h1>
     {{else}}
       {{#unless cardMade}}
-        <a class="waves-effect waves-light btn new-user">Fetch My Card</a>
+        <a class="waves-effect waves-light btn fetch-info">Fetch My Card</a>
       {{/unless}}
     {{ /unless }}
 
 
     <div class="row">
       <div class="col s6">
-        {{#each userCards}}
-          {{>userCard}}
-        {{/each}}
+        <!-- {{#each userCards}} -->
+          {{>currentUserCard}}
+        <!-- {{/each}} -->
       </div>
-      {{>editInfo}}
+      {{>editInfoForm}}
     </div>
   </div>
 
 </body>
 
-<template name="userCard">
+<template name="currentUserCard">
   <div class="card blue-grey darken-1">
     <div class="card-content white-text">
-      <span class="card-title">{{name}}</span>
-      <p>Username: {{login}}</p>
-      <p>Email: {{email}}</p>
-      <p>Location: {{location}}</p>
-      <p>Followers: {{followers}}</p>
-      <p>Following: {{following}}</p>
+      <span class="card-title">{{user.name}}</span>
+      <p>Username: {{user.username}}</p>
+      <p>Email: {{user.email}}</p>
+      <p>Location: {{user.location}}</p>
+      <p>Followers: {{user.followers}}</p>
+      <p>Following: {{user.following}}</p>
     </div>
     <div class="card-action">
       <a href="#">Delete</a>
@@ -44,34 +44,44 @@
   </div>
 </template>
 
-<template name="editInfo">
+
+<!-- <template name="editInfoForm">
+    <form class="col s6">
+      <input type="text" name="currentName" value="{{user.name}}">
+      <input type="submit" value="Save Changes">
+      <label for="username">{{user.username}}</label>
+    </form>
+</template>
+ -->
+
+<template name="editInfoForm">
   <h3 class="center">Edit</h3>
   <div class="row">
     <form class="col s6">
       <div class="row">
         <div class="input-field col s6">
-          <input id="name" type="text" class="validate">
+          <input id="name" type="text" class="validate" name="currentName">
           <label for="name">{{user.name}}</label>
         </div>
         <div class="input-field col s6">
-          <input id="username" type="text" class="validate">
+          <input id="username" type="text" class="validate" name="username">
           <label for="username">{{user.username}}</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input  id="email" type="text" class="validate">
+          <input  id="email" type="text" class="validate" name="email">
           <label for="email">{{user.email}}</label>
         </div>
         <div class="input-field col s6">
-          <input id="location" type="password" class="validate">
+          <input id="location" type="text" class="validate" name="location">
           <label for="location">{{user.location}}</label>
         </div>
       </div>
+      <div class="center">
+        <input id="submit" class="waves-effect waves-light btn edit" type="submit" value="Save Changes">
+      </div>
     </form>
-    <div class="center">
-      <a class="waves-effect waves-light btn edit center">Save Changes</a>
-    </div>
   </div>
 </template>
 
