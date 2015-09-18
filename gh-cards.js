@@ -64,11 +64,12 @@ if (Meteor.isClient) {
       var newUserName = event.target.username.value;
       var newEmail    = event.target.email.value;
       var newLocation = event.target.location.value;
+      var userCard = UserCards.findOne({owner: Meteor.userId()});
       // console.log(newName);
       // console.log(newUserName);
       // console.log(newEmail);
       // console.log(newLocation);
-      Meteor.call('updateCard', newName, newUserName, newEmail, newLocation);
+      Meteor.call('updateCard', userCard._id, newName, newUserName, newEmail, newLocation);
     }
   });
 
