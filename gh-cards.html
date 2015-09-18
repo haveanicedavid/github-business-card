@@ -9,9 +9,9 @@
     {{#unless currentUser}}
       <h1>Please log in</h1>
     {{else}}
-      {{#unless cardMade}}
-        <a class="waves-effect waves-light btn fetch-info">Fetch My Card</a>
-      {{/unless}}
+      <!-- {{#unless cardMade}} -->
+        <a class="waves-effect waves-light btn fetch-info">Fetch My Current Info</a>
+      <!-- {{/unless}} -->
     {{ /unless }}
 
 
@@ -43,16 +43,6 @@
     </div>
   </div>
 </template>
-
-
-<!-- <template name="editInfoForm">
-    <form class="col s6">
-      <input type="text" name="currentName" value="{{user.name}}">
-      <input type="submit" value="Save Changes">
-      <label for="username">{{user.username}}</label>
-    </form>
-</template>
- -->
 
 <template name="editInfoForm">
   <h3 class="center">Edit</h3>
