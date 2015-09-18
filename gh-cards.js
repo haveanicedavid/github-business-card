@@ -32,6 +32,18 @@ if (Meteor.isClient) {
       Meteor.call('fetchUserData', this._id);
     }
   });
+
+  Template.editInfo.helpers({
+    user: function() {
+      var user = UserCards.findOne({owner: Meteor.userId()});
+      return {
+        name: user.name,
+        username: user.login,
+        email: user.email,
+        location: user.location
+      };
+    }
+  });
 }
 
 Meteor.methods({

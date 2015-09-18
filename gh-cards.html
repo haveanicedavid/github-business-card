@@ -14,16 +14,16 @@
       {{/unless}}
     {{ /unless }}
 
-  </div>
 
-  <div class="row">
-    {{#each userCards}}
-    <div class="col s3">
-      {{>userCard}}
+    <div class="row">
+      <div class="col s6">
+        {{#each userCards}}
+          {{>userCard}}
+        {{/each}}
+      </div>
+      {{>editInfo}}
     </div>
-    {{/each}}
   </div>
-  {{>editInfo}}
 
 </body>
 
@@ -45,37 +45,33 @@
 </template>
 
 <template name="editInfo">
+  <h3 class="center">Edit</h3>
   <div class="row">
     <form class="col s6">
       <div class="row">
         <div class="input-field col s6">
-          <input value="{{name}}" id="first_name" type="text" class="validate">
-          <label for="first_name">Name</label>
+          <input id="name" type="text" class="validate">
+          <label for="name">{{user.name}}</label>
         </div>
         <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">Username</label>
+          <input id="username" type="text" class="validate">
+          <label for="username">{{user.username}}</label>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12">
-          <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-          <label for="disabled">Email</label>
+        <div class="input-field col s6">
+          <input  id="email" type="text" class="validate">
+          <label for="email">{{user.email}}</label>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
-          <label for="password">Location</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
-          <label for="email">Email</label>
+        <div class="input-field col s6">
+          <input id="location" type="password" class="validate">
+          <label for="location">{{user.location}}</label>
         </div>
       </div>
     </form>
+    <div class="center">
+      <a class="waves-effect waves-light btn edit center">Save Changes</a>
+    </div>
   </div>
 </template>
 
