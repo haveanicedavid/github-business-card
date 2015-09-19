@@ -25,6 +25,10 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.currentUserCard.events({
+
+  });
+  
   Template.currentUserCard.helpers({
     user: function() {
       var user = UserCards.findOne({owner: Meteor.userId()});

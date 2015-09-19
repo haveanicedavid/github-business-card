@@ -10,14 +10,10 @@ Meteor.methods({
     } 
 
     HTTP.get(url, function(error, result) {
-      // console.log(result);
       if (error) {
-        // console.log(error);
       } else if (currentCard) {
-        // console.log(result);
         Meteor.call('updateCard', currentCard._id, result.name, result.login, result.email, result.location, result.followers, result.following);
       } else {
-        console.log("Call made to createCard");
         Meteor.call('createCard', result.data);
       }
     });
@@ -28,12 +24,6 @@ Meteor.methods({
       throw new Meteor.Error("not-authorized");
     }
 
-    console.log('createCard hit');
-    console.log(userData);
-    //   console.log(Meteor.user().name);
-    //   console.log(Meteor.userId());
-    console.log(userData.name);
-    console.log(userData.location);
     UserCards.insert({
       owner:     Meteor.userId(),
       name:      userData.name,

@@ -6,7 +6,7 @@ if (Meteor.isServer) {
     return UserCards.find({
       $or: [
         { private: {$ne: true} },
-        // { owner: this.userId }
+        { owner: this.userId }
       ]
     });
   });
