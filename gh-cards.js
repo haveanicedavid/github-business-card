@@ -18,17 +18,28 @@ if (Meteor.isClient) {
       Meteor.call('fetchUserData', Meteor.userId(), token);
     },
 
+    // 'click .toggle-private': function(event) {
+    //   event.preventDefault();
+    //   var card = UserCards.findOne({owner: Meteor.userId()});
+    //   Meteor.call('setPrivate', card._id, !card.private);
+    // }
+  });
+
+  Template.currentUserCard.events({
     'click .toggle-private': function(event) {
       event.preventDefault();
       var card = UserCards.findOne({owner: Meteor.userId()});
       Meteor.call('setPrivate', card._id, !card.private);
+    },
+
+    'click .delete-card': function(event) {
+      event.preventDefault();
+      var card = UserCards.findOne({owner: Meteor.userId()});
+      Meteor.call('deleteCard', card._id);
     }
-  });
-
-  Template.currentUserCard.events({
 
   });
-  
+
   Template.currentUserCard.helpers({
     user: function() {
       var user = UserCards.findOne({owner: Meteor.userId()});

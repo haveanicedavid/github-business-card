@@ -11,7 +11,9 @@ Meteor.methods({
 
     HTTP.get(url, function(error, result) {
       if (error) {
+        console.log(error);
       } else if (currentCard) {
+        // This isn't needed if I add delete functionality
         Meteor.call('updateCard', currentCard._id, result.name, result.login, result.email, result.location, result.followers, result.following);
       } else {
         Meteor.call('createCard', result.data);
@@ -49,6 +51,14 @@ Meteor.methods({
       followers: followers,
       following: following
     }});
+  },
+
+  deleteCard: function(cardId) {
+    var card = UserCards.findOne(cardId);
+    if (card.private && card.owner !== Meteor.userId()) {
+      throw new Meteor.Error("not-authorized");
+    }
+    UserCards.remove(cardId);
   },
 
   setPrivate: function(cardId, setToPrivate) {

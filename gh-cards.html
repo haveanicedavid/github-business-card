@@ -9,10 +9,12 @@
     {{#unless currentUser}}
       <h1 class="center">Please log in</h1>
     {{else}}
+    {{/unless }}
+    {{#unless cardMade}}
       <div class="center">
         <a class="waves-effect waves-light btn fetch-info">Fetch My Current Info</a>
       </div>
-    {{ /unless }}
+    {{/unless}}
 
 
     {{#if cardMade}}
