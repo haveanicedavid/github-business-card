@@ -1,6 +1,7 @@
+UserCards = new Mongo.Collection('userCards');
+
 Meteor.methods({
-  fetchUserData: function() {
-    var token = Meteor.user().services.github.accessToken;
+  fetchUserData: function(userId, token) {
     var url   = 'http://api.github.com/user?access_token=' + token;
     var currentCard = UserCards.findOne({owner: Meteor.userId()});
 
@@ -9,21 +10,32 @@ Meteor.methods({
     } 
 
     HTTP.get(url, function(error, result) {
+      // console.log(result);
       if (error) {
-        console.log(error);
+        // console.log(error);
       } else if (currentCard) {
-        var data = result.data;
-        Meteor.call('updateCard', currentCard._id, data.name, data.login, data.email, data.location, data.followers, data.following);
+        // console.log(result);
+        Meteor.call('updateCard', currentCard._id, result.name, result.login, result.email, result.location, result.followers, result.following);
       } else {
-        // console.log(result.data);
+        console.log("Call made to createCard");
         Meteor.call('createCard', result.data);
       }
     });
   },
 
   createCard: function(userData) {
+    if (! Meteor.userId()) {
+      throw new Meteor.Error("not-authorized");
+    }
+
+    console.log('createCard hit');
+    console.log(userData);
+    //   console.log(Meteor.user().name);
+    //   console.log(Meteor.userId());
+    console.log(userData.name);
+    console.log(userData.location);
     UserCards.insert({
-      owner: Meteor.userId(),
+      owner:     Meteor.userId(),
       name:      userData.name,
       location:  userData.location,
       login:     userData.login,
@@ -31,7 +43,11 @@ Meteor.methods({
       following: userData.following,
       email:     userData.email,
       url:       userData.html_url,
+      // private:   false
     });
+    var card = UserCards.findOne({owner: Meteor.userId()});
+    console.log(card.name);
+    console.log(card.location);
   },
 
   updateCard: function(cardId, name, username, email, location, followers, following) {

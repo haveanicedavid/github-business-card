@@ -14,7 +14,8 @@ if (Meteor.isClient) {
 
   Template.body.events({
     'click .fetch-info': function () {
-      Meteor.call('fetchUserData', Meteor.userId());
+      var token = Meteor.user().profile.github_accessToken;
+      Meteor.call('fetchUserData', Meteor.userId(), token);
     },
 
     'click .toggle-private': function(event) {
@@ -49,8 +50,8 @@ if (Meteor.isClient) {
       var newUserName = event.target.username.value || userCard.login;
       var newEmail    = event.target.email.value || userCard.email;
       var newLocation = event.target.location.value || userCard.location;
-      var followers = userCard.followers;
-      var following = userCard.following;
+      var followers   = userCard.followers;
+      var following   = userCard.following;
 
       Meteor.call('updateCard', userCard._id, newName, newUserName, newEmail, newLocation, followers, following);
     }
@@ -67,5 +68,6 @@ if (Meteor.isClient) {
       };
     }
   });
+
 }
 
