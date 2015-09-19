@@ -35,11 +35,8 @@ Meteor.methods({
       following: userData.following,
       email:     userData.email,
       url:       userData.html_url,
-      // private:   false
+      private:   false
     });
-    var card = UserCards.findOne({owner: Meteor.userId()});
-    console.log(card.name);
-    console.log(card.location);
   },
 
   updateCard: function(cardId, name, username, email, location, followers, following) {

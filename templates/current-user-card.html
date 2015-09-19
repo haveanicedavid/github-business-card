@@ -9,14 +9,14 @@
       <p>Following: {{user.following}}</p>
     </div>
     <div class="card-action">
-      <a href="#" class="toggle-private">
+      <a href="" class="delete-card">Delete</a>
+      <a href="" class="toggle-private">
         {{#if user.private}}
-          Private
+          Toggle Public
         {{else}}
-          Public
+          Toggle Private
         {{/if}}
       </a>
-      <a href="#" class="delete-card">Delete</a>
     </div>
   </div>
 </template>
