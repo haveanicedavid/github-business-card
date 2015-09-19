@@ -40,76 +40,7 @@
       </div>
     {{/if}}
     
-
   </div>
 </body>
 
-<template name="currentUserCard">
-  <div class="card blue-grey darken-1">
-    <div class="card-content white-text">
-      <span class="card-title">{{user.name}}</span>
-      <p>Username: {{user.username}}</p>
-      <p>Email: {{user.email}}</p>
-      <p>Location: {{user.location}}</p>
-      <p>Followers: {{user.followers}}</p>
-      <p>Following: {{user.following}}</p>
-    </div>
-    <div class="card-action">
-      <a href="#" class="toggle-private">
-        {{#if user.private}}
-          Private
-        {{else}}
-          Public
-        {{/if}}
-      </a>
-    </div>
-  </div>
-</template>
-
-<template name="editInfoForm">
-  <h3 class="center edit-title">Edit</h3>
-  <div class="row">
-    <form class="col s6">
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="name" type="text" class="validate" name="currentName">
-          <label for="name">{{user.name}}</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="username" type="text" class="validate" name="username">
-          <label for="username">{{user.username}}</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s6">
-          <input  id="email" type="text" class="validate" name="email">
-          <label for="email">{{user.email}}</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="location" type="text" class="validate" name="location">
-          <label for="location">{{user.location}}</label>
-        </div>
-      </div>
-      <div class="center">
-        <input id="" class="waves-effect waves-light btn" type="submit" value="Save Changes">
-      </div>
-    </form>
-  </div>
-</template>
-
-<template name="userCard">
-  <div class="card blue-grey darken-1">
-    <div class="card-content white-text">
-      <span class="card-title">{{name}}</span>
-      <p>Username: {{login}}</p>
-      <p>Email: {{email}}</p>
-      <p>Location: {{location}}</p>
-      <p>Followers: {{followers}}</p>
-      <p>Following: {{following}}</p>
-    </div>
-    <div class="card-action">
-      <a href="{{url}}">Visit their Github</a>
-    </div>
-  </div>
-</template>
 
