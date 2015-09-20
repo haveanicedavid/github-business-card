@@ -53,6 +53,10 @@ if (Meteor.isClient) {
     'submit form': function(event) {
       event.preventDefault();
       var userCard = UserCards.findOne({owner: Meteor.userId()});
+      
+      if (userCard.private && userCard.owner !== Meteor.userId()) {
+        throw new Meteor.Error("not-authorized");
+      }
 
       var newName     = event.target.currentName.value || userCard.name;
       var newUserName = event.target.username.value || userCard.login;
