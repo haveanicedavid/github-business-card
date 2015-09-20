@@ -3,7 +3,6 @@ UserCards = new Mongo.Collection('userCards');
 Meteor.methods({
   fetchUserData: function(userId, token) {
     var url   = 'http://api.github.com/user?access_token=' + token;
-    var currentCard = UserCards.findOne({owner: Meteor.userId()});
 
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
@@ -12,9 +11,6 @@ Meteor.methods({
     HTTP.get(url, function(error, result) {
       if (error) {
         console.log(error);
-      } else if (currentCard) {
-        // This isn't needed if I add delete functionality
-        Meteor.call('updateCard', currentCard._id, result.name, result.login, result.email, result.location, result.followers, result.following);
       } else {
         Meteor.call('createCard', result.data);
       }
@@ -41,10 +37,10 @@ Meteor.methods({
 
   updateCard: function(cardId, name, username, email, location, followers, following) {
     UserCards.update(cardId, { $set: {
-      name:     name,
-      login:    username,
-      email:    email,
-      location: location,
+      name:      name,
+      login:     username,
+      email:     email,
+      location:  location,
       followers: followers,
       following: following
     }});

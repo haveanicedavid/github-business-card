@@ -17,12 +17,6 @@ if (Meteor.isClient) {
       var token = Meteor.user().profile.github_accessToken;
       Meteor.call('fetchUserData', Meteor.userId(), token);
     },
-
-    // 'click .toggle-private': function(event) {
-    //   event.preventDefault();
-    //   var card = UserCards.findOne({owner: Meteor.userId()});
-    //   Meteor.call('setPrivate', card._id, !card.private);
-    // }
   });
 
   Template.currentUserCard.events({
@@ -37,7 +31,6 @@ if (Meteor.isClient) {
       var card = UserCards.findOne({owner: Meteor.userId()});
       Meteor.call('deleteCard', card._id);
     }
-
   });
 
   Template.currentUserCard.helpers({
