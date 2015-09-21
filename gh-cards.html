@@ -7,6 +7,7 @@
     <div class="center">{{> loginButtons}}</div>
 
     {{#if currentUser}}
+    <div class="basic-grey z-depth-2">
       {{#unless cardMade}}
         <div class="center">
           <a class="waves-effect waves-light btn fetch-info">Fetch My Current Info</a>
@@ -23,11 +24,16 @@
           {{>editInfoForm}}
         </div>
       {{/if}}
+    </div>
 
-      <div class="center">
+    <div class="row">
+      <div  id="public-title" class="col s12 grid-example teal darken-1 center-align z-depth-3"><span class="flow-text white-text center"><h2>Public Cards</h2></span></div>
+    </div>
+
+<!--       <div class="center">
         <h3>Public Cards</h3>
       </div>
-
+ -->
       <div class="row">
         {{#each userCards}}
           {{#unless private}}

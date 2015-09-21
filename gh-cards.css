@@ -1,8 +1,13 @@
 /* CSS declarations go here */
+#public-title{
+/*  padding-top: 5%;
+  padding-bottom: 5%;
+*/  margin-top: 5%;
+}
+
 input#submit{
   background:none;
   border:none;
-  font-size:1em;
   color:white;
 }
 
@@ -29,4 +34,15 @@ input#submit{
 .edit-title {
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+
+.basic-grey {
+    margin-left:-11px;
+    margin-right:-11px;
+    max-width: 10000px;
+    background: #F7F7F7;
+    z-index: -1;
+    padding: 0px 70px 0px 51px;
+    border:1px solid #E4E4E4;
 }

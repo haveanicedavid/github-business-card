@@ -1,14 +1,14 @@
 <template name="currentUserCard">
-  <div class="card blue-grey darken-1">
+  <div class="card teal z-depth-2">
     <div class="card-content white-text">
-      <span class="card-title">{{user.name}}</span>
-      <p>Username: {{user.username}}</p>
+      <span class="card-title -text text-lighten-3">{{user.name}}</span>
+      <p><span class="medium">Username:</span> {{user.username}}</p>
       <p>Email: {{user.email}}</p>
       <p>Location: {{user.location}}</p>
       <p>Followers: {{user.followers}}</p>
       <p>Following: {{user.following}}</p>
     </div>
-    <div class="card-action">
+    <div class="card-action teal darken-2">
       <a href="" class="delete-card">Delete</a>
       <a href="" class="toggle-private">
         {{#if user.private}}
